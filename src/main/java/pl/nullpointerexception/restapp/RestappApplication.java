@@ -3,21 +3,32 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import pl.nullpointerexception.restapp.PaczkazTestami.Bike;
+import pl.nullpointerexception.restapp.PaczkazTestami.BikeService;
 
-import pl.nullpointerexception.restapp.Model.Groupad;
-import pl.nullpointerexception.restapp.Model.Test;
-import pl.nullpointerexception.restapp.Model.Task;
-import pl.nullpointerexception.restapp.Model.Question;
-import pl.nullpointerexception.restapp.Model.User;
-import pl.nullpointerexception.restapp.Model.Ocena;
-import pl.nullpointerexception.restapp.Model.Answer;
-import pl.nullpointerexception.restapp.Repository.QuestionRepository;
-import pl.nullpointerexception.restapp.Repository.TestRepository;
-import pl.nullpointerexception.restapp.Repository.TaskRepository;
-import pl.nullpointerexception.restapp.Repository.UserRepository;
-import pl.nullpointerexception.restapp.Repository.GroupRepository;
-import pl.nullpointerexception.restapp.Repository.AnswerRepository;
-import pl.nullpointerexception.restapp.Repository.OcenaRepository;
+import pl.nullpointerexception.restapp.Group.Groupad;
+import pl.nullpointerexception.restapp.Group.GroupRepository;
+
+import pl.nullpointerexception.restapp.user.UserRepository;
+import pl.nullpointerexception.restapp.user.User;
+
+import pl.nullpointerexception.restapp.Test.Test;
+import pl.nullpointerexception.restapp.Test.TestRepository;
+
+import pl.nullpointerexception.restapp.Task.Task;
+import pl.nullpointerexception.restapp.Task.TaskRepository;
+
+import pl.nullpointerexception.restapp.Question.Question;
+import pl.nullpointerexception.restapp.Question.QuestionRepository;
+
+import pl.nullpointerexception.restapp.Ocena.Ocena;
+import pl.nullpointerexception.restapp.Ocena.OcenaRepository;
+
+import pl.nullpointerexception.restapp.Answer.Answer;
+import pl.nullpointerexception.restapp.Answer.AnswerRepository;
+
+
+
 import java.sql.Date;
 
 @SpringBootApplication
@@ -30,6 +41,14 @@ public class RestappApplication {
         java.sql.Date sqlDate = new java.sql.Date(1540264000000L);
 
 
+       // NewBikeDto bike1 = new NewBikeDto(1L, "Kross Esker 4.0, 29 cali męski", "KRS12345", 30, 100);
+        BikeService bikeService = context.getBean(BikeService.class);
+      //  bikeService.add(bike1);
+        Bike payment = bikeService.ChangeModel(1L, "test", "test");
+        System.out.println("Należność do zapłaty za wypożyczenie: " + payment);
+        bikeService.returnBike(1L);
+
+
         UserRepository userRepository = context.getBean(UserRepository.class);
         OcenaRepository ocenaRepository = context.getBean(OcenaRepository.class);
         TestRepository testRepository = context.getBean(TestRepository.class);
@@ -37,9 +56,9 @@ public class RestappApplication {
         AnswerRepository answerRepository = context.getBean(AnswerRepository.class);
         QuestionRepository questionRepository = context.getBean(QuestionRepository.class);
         GroupRepository groupRepository = context.getBean(GroupRepository.class);
-       // saveData2(questionRepository, testRepository,answerRepository);
-        //saveData3(taskRepository, groupRepository);
-       // saveData2(questionRepository, testRepository);
+        saveData2(questionRepository, testRepository,answerRepository);
+        saveData3(taskRepository, groupRepository);
+
         saveData4(taskRepository,groupRepository,userRepository,testRepository);
 
       //  User user1 = new User("Testocen", "admin1", "DN@gmail.com",true, det1);
