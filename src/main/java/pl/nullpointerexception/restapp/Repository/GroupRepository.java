@@ -1,30 +1,22 @@
 package pl.nullpointerexception.restapp.Repository;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.repository.CrudRepository;
 
-
-import jakarta.persistence.EntityManager;
-import java.util.Optional;
 import pl.nullpointerexception.restapp.Model.Groupad;
+import pl.nullpointerexception.restapp.Model.User;
+
+import java.util.ArrayList;
+import java.util.List;
+
 @Repository
-public class GroupRepository{
+public
+interface GroupRepository extends CrudRepository<Groupad, Long> {
 
-    private final EntityManager entityManager;
+    public final List<User> groups = new ArrayList<>();
 
-    public GroupRepository(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
+    List<Groupad> findAll();
 
-    @Transactional
-    public void save(Groupad group) {
-        entityManager.persist(group);
-    }
-    public Optional<Groupad> findById(Long id) {
-        return Optional.ofNullable(entityManager.find(Groupad.class, id));
-    }
+    List<Groupad> findAllByname(String name);
 
-    @Transactional
-    public void deleteById(Long id) {
-        findById(id).ifPresent(entityManager::remove);
-    }
+    Groupad findById(int id);
 }

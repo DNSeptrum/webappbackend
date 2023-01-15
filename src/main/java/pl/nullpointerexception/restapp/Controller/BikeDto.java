@@ -1,15 +1,10 @@
-package pl.nullpointerexception.restapp.Model;
+package pl.nullpointerexception.restapp.Controller;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
-import java.time.LocalDateTime;
-
-@Entity
-public
-class Bike {
+public class BikeDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,14 +12,9 @@ class Bike {
     private String serialNo;
     private double hourPrice;
     private double dayPrice;
-    private String borrowerId;
-    private LocalDateTime dateOfReturn;
 
-    public Bike() {
-    }
-
-    public Bike( String model, String serialNo, double hourPrice, double dayPrice) {
-       // this.id = id;
+    public BikeDto( String model, String serialNo, double hourPrice, double dayPrice) {
+        //this.id = id;
         this.model = model;
         this.serialNo = serialNo;
         this.hourPrice = hourPrice;
@@ -71,31 +61,14 @@ class Bike {
         this.dayPrice = dayPrice;
     }
 
-    public String getBorrowerId() {
-        return borrowerId;
-    }
-
-    public void setBorrowerId(String borrowerId) {
-        this.borrowerId = borrowerId;
-    }
-
-    public LocalDateTime getDateOfReturn() {
-        return dateOfReturn;
-    }
-
-    public void setDateOfReturn(LocalDateTime dateOfReturn) {
-        this.dateOfReturn = dateOfReturn;
-    }
-
     @Override
     public String toString() {
-        return "Bike{" +
+        return "BikeDto{" +
                 "id=" + id +
                 ", model='" + model + '\'' +
                 ", serialNo='" + serialNo + '\'' +
                 ", hourPrice=" + hourPrice +
                 ", dayPrice=" + dayPrice +
-                ", borrowerId='" + borrowerId + '\'' +
                 '}';
     }
 }

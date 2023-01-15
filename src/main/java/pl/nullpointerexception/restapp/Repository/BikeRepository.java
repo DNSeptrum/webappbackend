@@ -1,28 +1,17 @@
 package pl.nullpointerexception.restapp.Repository;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-import pl.nullpointerexception.restapp.Model.Bike;
-import jakarta.persistence.EntityManager;
+import org.springframework.data.repository.CrudRepository;
+import java.util.List;
 import java.util.Optional;
+
+import pl.nullpointerexception.restapp.Model.Bike;
 @Repository
-public class BikeRepository {
-    private final EntityManager entityManager;
+public
+interface BikeRepository extends CrudRepository<Bike, Long> {
 
-    public BikeRepository(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
 
-    @Transactional
-    public void save(Bike bike) {
-        entityManager.persist(bike);
-    }
-    public Optional<Bike> findById(Long id) {
-        return Optional.ofNullable(entityManager.find(Bike.class, id));
-    }
-
-    @Transactional
-    public void deleteById(Long id) {
-        findById(id).ifPresent(entityManager::remove);
-    }
+    Optional<Bike> findBySerialNoIgnoreCase(String serialNo);
+    int countAllByBorrowerIdIsNotNull();
+    List<Bike> findAllByBorrowerIdIsNullOrderByDayPrice();
 
 }
