@@ -5,9 +5,6 @@ public class NewAnswerDto {
     private Long id;
     private String answer;
 
-
-
-
     public NewAnswerDto(String answer) {
         this.answer = answer;
     }

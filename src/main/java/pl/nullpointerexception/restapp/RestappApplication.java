@@ -3,9 +3,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import pl.nullpointerexception.restapp.PaczkazTestami.Bike;
-import pl.nullpointerexception.restapp.PaczkazTestami.BikeService;
-
 import pl.nullpointerexception.restapp.Group.Groupad;
 import pl.nullpointerexception.restapp.Group.GroupRepository;
 
@@ -42,11 +39,11 @@ public class RestappApplication {
 
 
        // NewBikeDto bike1 = new NewBikeDto(1L, "Kross Esker 4.0, 29 cali męski", "KRS12345", 30, 100);
-        BikeService bikeService = context.getBean(BikeService.class);
+      //  BikeService bikeService = context.getBean(BikeService.class);
       //  bikeService.add(bike1);
-        Bike payment = bikeService.ChangeModel(1L, "test", "test");
-        System.out.println("Należność do zapłaty za wypożyczenie: " + payment);
-        bikeService.returnBike(1L);
+      //  Bike payment = bikeService.ChangeModel(1L, "test", "test");
+      //  System.out.println("Należność do zapłaty za wypożyczenie: " + payment);
+       // bikeService.returnBike(1L);
 
 
         UserRepository userRepository = context.getBean(UserRepository.class);
@@ -56,10 +53,10 @@ public class RestappApplication {
         AnswerRepository answerRepository = context.getBean(AnswerRepository.class);
         QuestionRepository questionRepository = context.getBean(QuestionRepository.class);
         GroupRepository groupRepository = context.getBean(GroupRepository.class);
-        saveData2(questionRepository, testRepository,answerRepository);
-        saveData3(taskRepository, groupRepository);
+      //  saveData2(questionRepository, testRepository,answerRepository);
+       // saveData3(taskRepository, groupRepository);
 
-        saveData4(taskRepository,groupRepository,userRepository,testRepository);
+       // saveData4(taskRepository,groupRepository,userRepository,testRepository);
 
       //  User user1 = new User("Testocen", "admin1", "DN@gmail.com",true, det1);
        // userRepository.save(user1);
@@ -164,11 +161,11 @@ public class RestappApplication {
         Question ocena2 = new Question("pyt2",5);
         Question ocena3 = new Question("pyt3",2);
         //dodawanie odpowiedzi
-        ocena.addQuestion(answer);
-        ocena.addQuestion(answer2);
+        ocena.addAnswer(answer);
+        ocena.addAnswer(answer2);
        // ocena2.addQuestion(answer2);
        // ocena2.addQuestion(answer3);
-         ocena3.addQuestion(answer3);
+         ocena3.addAnswer(answer3);
 
         ocenaRepository.save(ocena);
         ocenaRepository.save(ocena2);

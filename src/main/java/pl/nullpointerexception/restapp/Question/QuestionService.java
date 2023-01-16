@@ -39,4 +39,14 @@ public class QuestionService {
         Question savedQuestion = questionRepository.save(question);
         return questionDtoMapper.map(savedQuestion);
     }
+
+    Optional<NewQuestionDto> replaceCompany(Long questionId, NewQuestionDto questionDto) {
+        if (!questionRepository.existsById(questionId)) {
+            return Optional.empty();
+        }
+        questionDto.setId(questionId);
+        Question companyToUpdate = questionDtoMapper.map(questionDto);
+        Question updatedEntity = questionRepository.save(companyToUpdate);
+        return Optional.of(questionDtoMapper.map(updatedEntity));
+    }
 }

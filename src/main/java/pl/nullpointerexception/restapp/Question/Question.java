@@ -11,7 +11,7 @@ public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     private String text;
     private int CorrectAnswer;
@@ -21,7 +21,7 @@ public class Question {
 
     @OneToMany(fetch = FetchType.EAGER)
     private List<Answer> answers = new ArrayList<>();
-    public void addQuestion(Answer answer) {
+    public void addAnswer(Answer answer) {
         answers.add(answer);
     }
 
@@ -40,11 +40,11 @@ public class Question {
         this.text = text;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

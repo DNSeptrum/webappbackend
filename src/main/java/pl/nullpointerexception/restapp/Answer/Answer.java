@@ -1,18 +1,17 @@
 
 package pl.nullpointerexception.restapp.Answer;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import pl.nullpointerexception.restapp.Question.Question;
 
-import java.util.Date;
-import java.util.Optional;
 @Entity
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String answer;
-
-
     public Answer() {
     }
 

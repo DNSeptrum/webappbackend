@@ -7,6 +7,7 @@ import pl.nullpointerexception.restapp.Answer.NewAnswerDto;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/questions")
@@ -29,10 +30,10 @@ public class QuestionController {
         }
     }
 
-    //@GetMapping("/{id}")
-   // Optional<Question> getUserById(@PathVariable Long id) {
-     //   return questionRepository.findById(id);
-   // }
+    @GetMapping("/{id}/a")
+    Optional<Question> getUserById(@PathVariable Long id) {
+        return questionRepository.findById(id);
+    }
 
 
 
@@ -44,7 +45,7 @@ public class QuestionController {
     }
 
     @GetMapping("/{id}/answers")
-    ResponseEntity<List<NewAnswerDto>> getAnswerOffers(@PathVariable Long id) {
+    ResponseEntity<List<NewAnswerDto>> getQuestionOffers(@PathVariable Long id) {
         if (questionService.getQuestionById(id).isEmpty()) {
             return ResponseEntity.notFound().build();
         }
@@ -52,7 +53,7 @@ public class QuestionController {
     }
 
     @PostMapping
-    ResponseEntity<NewQuestionDto> saveQnswer(@RequestBody NewQuestionDto question) {
+    ResponseEntity<NewQuestionDto> saveQuestion(@RequestBody NewQuestionDto question) {
         NewQuestionDto savedCompany = questionService.saveQuestion(question);
         URI savedCompanyUri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -60,5 +61,25 @@ public class QuestionController {
                 .toUri();
         return ResponseEntity.created(savedCompanyUri).body(savedCompany);
     }
+
+    /*test answer
+    @PostMapping
+    ResponseEntity<NewQuestionDto> saveQuestion(@RequestBody NewQuestionDto question) {
+        NewQuestionDto savedCompany = questionService.saveQuestion(question);
+        URI savedCompanyUri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedCompany.getId())
+                .toUri();
+        return ResponseEntity.created(savedCompanyUri).body(savedCompany);
+    }
+
+    *////test anser
+    @PutMapping("/{id}")
+    ResponseEntity<?> replaceCompany(@PathVariable Long id, @RequestBody NewQuestionDto company) {
+        return questionService.replaceCompany(id, company)
+                .map(c -> ResponseEntity.noContent().build())
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 
 }
