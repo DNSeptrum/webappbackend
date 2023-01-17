@@ -13,14 +13,11 @@ public class QuestionService {
     private final QuestionDtoMapper questionDtoMapper;
     private final AnswerDtoMapper answerDtoMapper;
 
-    private final AnswerRepository answerRepository;
-    private final AnswerService answerService;
-    public QuestionService(QuestionRepository questionRepository, QuestionDtoMapper questionDtoMapper, AnswerDtoMapper answerDtoMapper, AnswerRepository answerRepository, AnswerService answerService) {
+    public QuestionService(QuestionRepository questionRepository, QuestionDtoMapper questionDtoMapper, AnswerDtoMapper answerDtoMapper) {
         this.questionRepository = questionRepository;
         this.questionDtoMapper = questionDtoMapper;
         this.answerDtoMapper = answerDtoMapper;
-        this.answerRepository = answerRepository;
-        this.answerService = answerService;
+
     }
 
     Optional<NewQuestionDto> getQuestionById(Long id) {
@@ -43,7 +40,7 @@ public class QuestionService {
         return questionDtoMapper.map(savedQuestion);
     }
 
-    Optional<NewQuestionDto> replaceCompany(Long questionId, NewQuestionDto questionDto) {
+    Optional<NewQuestionDto> replaceQuestion(Long questionId, NewQuestionDto questionDto) {
         if (!questionRepository.existsById(questionId)) {
             return Optional.empty();
         }

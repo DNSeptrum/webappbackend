@@ -13,6 +13,7 @@ public class TestDtoMapper {
         dto.setStartingDate(test.getStartingDate());
         dto.setTimePerQuestion(test.getTimePerQuestion());
         dto.setMaxPoint(test.getMaxPoint());
+        dto.setQuestions(test.getQuestions());
         return dto;
     }
 
@@ -25,6 +26,8 @@ public class TestDtoMapper {
         test.setStartingDate(dto.getStartingDate());
         test.setTimePerQuestion(dto.getTimePerQuestion());
         test.setMaxPoint(dto.getMaxPoint());
+        test.setQuestions(dto.getQuestions());
+
 
         return test;
     }

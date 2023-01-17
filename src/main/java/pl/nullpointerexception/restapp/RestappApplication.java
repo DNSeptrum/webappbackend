@@ -53,7 +53,9 @@ public class RestappApplication {
         AnswerRepository answerRepository = context.getBean(AnswerRepository.class);
         QuestionRepository questionRepository = context.getBean(QuestionRepository.class);
         GroupRepository groupRepository = context.getBean(GroupRepository.class);
-
+User user = new User("email1", "admin1", "naz1","has", "teacher",4,false);
+User resultUser = new User();
+      //  resultUser = userRepository.findAllByname2("admin1");
       //   saveData5(questionRepository);
       //  saveData2(questionRepository, testRepository,answerRepository);
        // saveData3(taskRepository, groupRepository);

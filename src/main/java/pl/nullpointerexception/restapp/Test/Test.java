@@ -23,7 +23,7 @@ public class Test {
     private int timePerQuestion;
     private int maxPoint;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
     private List<Question> questions = new ArrayList<>();
     public void addQuestion(Question question) {
         questions.add(question);

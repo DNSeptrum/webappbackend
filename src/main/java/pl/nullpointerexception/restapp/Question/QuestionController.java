@@ -3,13 +3,10 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import pl.nullpointerexception.restapp.Answer.Answer;
-import pl.nullpointerexception.restapp.Answer.AnswerDtoMapper;
 import pl.nullpointerexception.restapp.Answer.NewAnswerDto;
 import pl.nullpointerexception.restapp.Answer.AnswerService;
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/questions")
@@ -18,12 +15,12 @@ public class QuestionController {
     private final QuestionRepository questionRepository;
     private final QuestionService questionService ;
 
-    private final AnswerService answerService;
 
-    public QuestionController(QuestionRepository questionRepository, QuestionService questionService, AnswerService answerService) {
+
+    public QuestionController(QuestionRepository questionRepository, QuestionService questionService) {
         this.questionRepository = questionRepository;
         this.questionService = questionService;
-        this.answerService = answerService;
+
     }
 
     @GetMapping
@@ -35,12 +32,6 @@ public class QuestionController {
         }
     }
 
-    @GetMapping("/{id}/a")
-    Optional<Question> getUserById(@PathVariable Long id) {
-        return questionRepository.findById(id);
-    }
-
-
 
     @GetMapping("/{id}")
     ResponseEntity<NewQuestionDto> getQuestionById(@PathVariable Long id) {
@@ -50,7 +41,7 @@ public class QuestionController {
     }
 
     @GetMapping("/{id}/answers")
-    ResponseEntity<List<NewAnswerDto>> getQuestionOffers(@PathVariable Long id) {
+    ResponseEntity<List<NewAnswerDto>> getQuestionAnswer(@PathVariable Long id) {
         if (questionService.getQuestionById(id).isEmpty()) {
             return ResponseEntity.notFound().build();
         }
@@ -77,8 +68,8 @@ public class QuestionController {
 
 
     @PutMapping("/{id}")
-    ResponseEntity<?> replaceCompany(@PathVariable Long id, @RequestBody NewQuestionDto company) {
-        return questionService.replaceCompany(id, company)
+    ResponseEntity<?> replaceQuestion(@PathVariable Long id, @RequestBody NewQuestionDto question) {
+        return questionService.replaceQuestion(id, question)
                 .map(c -> ResponseEntity.noContent().build())
                 .orElse(ResponseEntity.notFound().build());
     }

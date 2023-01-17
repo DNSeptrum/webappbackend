@@ -18,7 +18,7 @@ public class UserController {
         if (name == null) {
             return (List<User>) userRepository.findAll();
         } else {
-            return userRepository.findAllByname(name);
+            return (List<User>) userRepository.findAllByname(name);
         }
     }
 

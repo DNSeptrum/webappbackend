@@ -27,10 +27,10 @@ public class AnswerController {
         }
     }
 
-    @GetMapping("/{id}/a")
-    Optional<Answer> getUserById(@PathVariable Long id) {
-        return answerRepository.findById(id);
-    }
+   // @GetMapping("/{id}/a")
+   // Optional<Answer> getUserById(@PathVariable Long id) {
+   //     return answerRepository.findById(id);
+  //  }
 
     @GetMapping("/{id}")
     ResponseEntity<NewAnswerDto> getAnswerById(@PathVariable Long id) {

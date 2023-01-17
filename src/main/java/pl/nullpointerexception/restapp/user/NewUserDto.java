@@ -24,6 +24,10 @@ public class NewUserDto {
     @OneToMany(fetch = FetchType.EAGER)
     private List<Ocena> grades = new ArrayList<>();
 
+    public NewUserDto() {
+
+    }
+
     public void addOcena(Ocena ocena) {
         grades.add(ocena);
     }
@@ -109,4 +113,5 @@ public class NewUserDto {
     public void setLoggedIn(boolean loggedIn) {
         isLoggedIn = loggedIn;
     }
+
 }
