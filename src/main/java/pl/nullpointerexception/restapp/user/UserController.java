@@ -1,5 +1,9 @@
 package pl.nullpointerexception.restapp.user;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,10 +12,13 @@ import java.util.Optional;
 public class UserController {
 
     private final UserRepository userRepository;
+    private  final  UserService userService;
 
-    public UserController(UserRepository userRepository) {
+    public UserController(UserRepository userRepository, UserService userService) {
         this.userRepository = userRepository;
+        this.userService = userService;
     }
+
 
     @GetMapping
     List<User> getProducts(@RequestParam(required = false) String name) {
@@ -27,8 +34,13 @@ public class UserController {
         return userRepository.findById(id);
     }
 
-   // @GetMapping("/{id}/producer")
-   // User getUserByProductId(@PathVariable Long id) {
-   //     return userRepository.findById(id).getUser;
-  //  }
+    @PostMapping
+    ResponseEntity<NewUserDto> saveUser(@RequestBody NewUserDto user) {
+        NewUserDto savedUser = userService.saveUser(user);
+        URI savedCompanyUri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedUser.getId())
+                .toUri();
+        return ResponseEntity.created(savedCompanyUri).body(savedUser);
+    }
 }

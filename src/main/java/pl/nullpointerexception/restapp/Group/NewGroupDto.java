@@ -19,6 +19,10 @@ public class NewGroupDto {
     @ManyToMany
     private List<Test> tests = new ArrayList<>();
 
+    public NewGroupDto() {
+
+    }
+
     public void addTest(Test test) {
         tests.add(test);
     }

@@ -1,8 +1,10 @@
 package pl.nullpointerexception.restapp.Task;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.nullpointerexception.restapp.user.User;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,10 +13,13 @@ import java.util.Optional;
 public class TaskController {
 
     private final TaskRepository taskRepository;
+    private final TaskService taskService;
 
-    public TaskController(TaskRepository taskRepository) {
+    public TaskController(TaskRepository taskRepository, TaskService taskService) {
         this.taskRepository = taskRepository;
+        this.taskService = taskService;
     }
+
 
 
     @GetMapping
@@ -29,5 +34,15 @@ public class TaskController {
     @GetMapping("/{id}")
     Optional<Task> getTaskById(@PathVariable Long id) {
         return taskRepository.findById(id);
+    }
+
+    @PostMapping
+    ResponseEntity<NewTaskDto> saveTask(@RequestBody NewTaskDto task) {
+        NewTaskDto savedCompany = taskService.saveTask(task);
+        URI savedCompanyUri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedCompany.getId())
+                .toUri();
+        return ResponseEntity.created(savedCompanyUri).body(savedCompany);
     }
 }

@@ -27,6 +27,10 @@ public class NewOcenaDto {
 
     }
 
+    public NewOcenaDto() {
+
+    }
+
 
     public void setData(Date data) {
         Data = data;

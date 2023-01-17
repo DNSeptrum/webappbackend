@@ -1,7 +1,9 @@
 package pl.nullpointerexception.restapp.user;
 
-import java.util.Optional;
+import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+@Service
 public class UserService {
 
 
@@ -17,5 +19,11 @@ public class UserService {
     public Optional<NewUserDto> getUserById(Long id) {
         return userRepository.findById(id)
                 .map(userDtoMapper::map);
+    }
+
+    NewUserDto saveUser(NewUserDto UserDto) {
+        User user = userDtoMapper.map(UserDto);
+        User savedUser = userRepository.save(user);
+        return userDtoMapper.map(savedUser);
     }
 }

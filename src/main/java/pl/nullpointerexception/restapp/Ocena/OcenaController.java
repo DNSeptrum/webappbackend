@@ -1,6 +1,10 @@
 package pl.nullpointerexception.restapp.Ocena;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,9 +13,11 @@ import java.util.Optional;
 public class OcenaController {
 
     private final OcenaRepository ocenaRepository;
+    private final OcenaService ocenaService;
 
-    public OcenaController(OcenaRepository ocenaRepository) {
+    public OcenaController(OcenaRepository ocenaRepository, OcenaService ocenaService) {
         this.ocenaRepository = ocenaRepository;
+        this.ocenaService = ocenaService;
     }
 
     @GetMapping
@@ -26,5 +32,15 @@ public class OcenaController {
     @GetMapping("/{id}")
     Optional<Ocena> getUserById(@PathVariable Long id) {
         return ocenaRepository.findById(id);
+    }
+
+    @PostMapping
+    ResponseEntity<NewOcenaDto> saveOcena(@RequestBody NewOcenaDto question) {
+        NewOcenaDto savedOcena = ocenaService.saveOcena(question);
+        URI savedCompanyUri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedOcena.getId())
+                .toUri();
+        return ResponseEntity.created(savedCompanyUri).body(savedOcena);
     }
 }

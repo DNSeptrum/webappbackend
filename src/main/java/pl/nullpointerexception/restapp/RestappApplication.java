@@ -46,15 +46,15 @@ public class RestappApplication {
        // bikeService.returnBike(1L);
 
 
-        UserRepository userRepository = context.getBean(UserRepository.class);
+       // UserRepository userRepository = context.getBean(UserRepository.class);
         OcenaRepository ocenaRepository = context.getBean(OcenaRepository.class);
         TestRepository testRepository = context.getBean(TestRepository.class);
         TaskRepository taskRepository = context.getBean(TaskRepository.class);
         AnswerRepository answerRepository = context.getBean(AnswerRepository.class);
         QuestionRepository questionRepository = context.getBean(QuestionRepository.class);
         GroupRepository groupRepository = context.getBean(GroupRepository.class);
-User user = new User("email1", "admin1", "naz1","has", "teacher",4,false);
-User resultUser = new User();
+//User user = new User("email1", "admin1", "naz1","has", "teacher",4,false);
+//User resultUser = new User();
       //  resultUser = userRepository.findAllByname2("admin1");
       //   saveData5(questionRepository);
       //  saveData2(questionRepository, testRepository,answerRepository);

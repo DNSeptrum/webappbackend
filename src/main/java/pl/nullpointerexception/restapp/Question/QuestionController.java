@@ -51,14 +51,6 @@ public class QuestionController {
     @PostMapping
     ResponseEntity<NewQuestionDto> saveQuestion(@RequestBody NewQuestionDto question) {
         NewQuestionDto savedCompany = questionService.saveQuestion(question);
-      //  NewAnswerDto answer = new NewAnswerDto();
-       // Optional<NewAnswerDto> savedAnswer = answerService.saveAnswer(answer);
-       // NewAnswerDto savedAnswer = answerService.saveAnswer(answer);
-       // Answer ocena = new Answer();
-       // AnswerDtoMapper.map.ocena(answer);
-        //Answer savedAnswer = answerService.saveAnswer(ocena);
-       // savedCompany.addAnswer(ocena);
-        //questionRepository.save(savedCompany);
         URI savedCompanyUri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(savedCompany.getId())
