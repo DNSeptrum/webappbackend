@@ -1,6 +1,7 @@
 package pl.nullpointerexception.restapp.Question;
 
 import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
 import pl.nullpointerexception.restapp.Answer.Answer;
 
 import java.util.ArrayList;
@@ -19,8 +20,9 @@ public class Question {
 
 
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
     private List<Answer> answers = new ArrayList<>();
+
     public void addAnswer(Answer answer) {
         answers.add(answer);
     }

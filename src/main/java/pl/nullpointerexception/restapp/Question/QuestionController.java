@@ -3,8 +3,10 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import pl.nullpointerexception.restapp.Answer.Answer;
+import pl.nullpointerexception.restapp.Answer.AnswerDtoMapper;
 import pl.nullpointerexception.restapp.Answer.NewAnswerDto;
-
+import pl.nullpointerexception.restapp.Answer.AnswerService;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -16,9 +18,12 @@ public class QuestionController {
     private final QuestionRepository questionRepository;
     private final QuestionService questionService ;
 
-    public QuestionController(QuestionRepository questionRepository, QuestionService questionService) {
+    private final AnswerService answerService;
+
+    public QuestionController(QuestionRepository questionRepository, QuestionService questionService, AnswerService answerService) {
         this.questionRepository = questionRepository;
         this.questionService = questionService;
+        this.answerService = answerService;
     }
 
     @GetMapping
@@ -55,6 +60,14 @@ public class QuestionController {
     @PostMapping
     ResponseEntity<NewQuestionDto> saveQuestion(@RequestBody NewQuestionDto question) {
         NewQuestionDto savedCompany = questionService.saveQuestion(question);
+      //  NewAnswerDto answer = new NewAnswerDto();
+       // Optional<NewAnswerDto> savedAnswer = answerService.saveAnswer(answer);
+       // NewAnswerDto savedAnswer = answerService.saveAnswer(answer);
+       // Answer ocena = new Answer();
+       // AnswerDtoMapper.map.ocena(answer);
+        //Answer savedAnswer = answerService.saveAnswer(ocena);
+       // savedCompany.addAnswer(ocena);
+        //questionRepository.save(savedCompany);
         URI savedCompanyUri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(savedCompany.getId())
@@ -62,18 +75,7 @@ public class QuestionController {
         return ResponseEntity.created(savedCompanyUri).body(savedCompany);
     }
 
-    /*test answer
-    @PostMapping
-    ResponseEntity<NewQuestionDto> saveQuestion(@RequestBody NewQuestionDto question) {
-        NewQuestionDto savedCompany = questionService.saveQuestion(question);
-        URI savedCompanyUri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(savedCompany.getId())
-                .toUri();
-        return ResponseEntity.created(savedCompanyUri).body(savedCompany);
-    }
 
-    *////test anser
     @PutMapping("/{id}")
     ResponseEntity<?> replaceCompany(@PathVariable Long id, @RequestBody NewQuestionDto company) {
         return questionService.replaceCompany(id, company)

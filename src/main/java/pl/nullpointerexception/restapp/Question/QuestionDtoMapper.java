@@ -9,6 +9,7 @@ public class QuestionDtoMapper {
         dto.setId(question.getId());
         dto.setText(question.getText());
         dto.setCorrectAnswer(question.getCorrectAnswer());
+        dto.setAnswers(question.getAnswers());
         return dto;
     }
 
@@ -17,6 +18,7 @@ public class QuestionDtoMapper {
         question.setId(dto.getId());
         question.setText(dto.getText());
         question.setCorrectAnswer(dto.getCorrectAnswer());
+        question.setAnswers(dto.getAnswers());
 
         return question;
     }

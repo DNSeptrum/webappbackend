@@ -53,6 +53,8 @@ public class RestappApplication {
         AnswerRepository answerRepository = context.getBean(AnswerRepository.class);
         QuestionRepository questionRepository = context.getBean(QuestionRepository.class);
         GroupRepository groupRepository = context.getBean(GroupRepository.class);
+
+      //   saveData5(questionRepository);
       //  saveData2(questionRepository, testRepository,answerRepository);
        // saveData3(taskRepository, groupRepository);
 
@@ -224,6 +226,20 @@ public class RestappApplication {
         group1.addUser(user2);
 
         groupRepository.save(group1 );
+    }
+    private static void saveData5(QuestionRepository questionRepository){
+
+        java.sql.Date sqlDate = new java.sql.Date(1540264000000L);
+
+        Answer ocena = new Answer("odp11");
+        Answer ocena2 = new Answer("odp2");
+        Answer ocena3 = new Answer("odp3");
+
+        Question user1 = new Question("pytanie1",3);
+        user1.addAnswer(ocena2);
+        user1.addAnswer(ocena);
+        user1.addAnswer(ocena3);
+        questionRepository.save(user1);
     }
 }
 

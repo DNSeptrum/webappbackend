@@ -1,7 +1,6 @@
 package pl.nullpointerexception.restapp.Answer;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -20,7 +19,7 @@ public class AnswerService {
                 .map(answerDtoMapper::map);
     }
 
-    NewAnswerDto saveAnswer(NewAnswerDto AnswerDto) {
+    public NewAnswerDto saveAnswer(NewAnswerDto AnswerDto) {
         Answer answerToSave = answerDtoMapper.map(AnswerDto);
         //answerToSave.setDateAdded(LocalDateTime.now());
         Answer savedAnswer = answerRepository.save(answerToSave);

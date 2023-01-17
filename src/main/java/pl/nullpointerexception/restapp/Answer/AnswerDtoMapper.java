@@ -24,7 +24,7 @@ public class AnswerDtoMapper {
         Answer answer = new Answer();
         answer.setId(dto.getId());
         answer.setAnswer(dto.getAnswer());
-       // Question question = questionRepository.findById(dto.getQuestionId()).orElseThrow();
+      //  Question question = questionRepository.findById(questionRepository.getQuestionId()).orElseThrow();
       //  answer.setQuestion(question);
         return answer;
     }

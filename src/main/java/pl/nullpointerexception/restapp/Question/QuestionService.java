@@ -1,7 +1,6 @@
 package pl.nullpointerexception.restapp.Question;
 import org.springframework.stereotype.Service;
-import pl.nullpointerexception.restapp.Answer.AnswerDtoMapper;
-import pl.nullpointerexception.restapp.Answer.NewAnswerDto;
+import pl.nullpointerexception.restapp.Answer.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -14,10 +13,14 @@ public class QuestionService {
     private final QuestionDtoMapper questionDtoMapper;
     private final AnswerDtoMapper answerDtoMapper;
 
-    public QuestionService(QuestionRepository questionRepository, QuestionDtoMapper questionDtoMapper, AnswerDtoMapper answerDtoMapper) {
+    private final AnswerRepository answerRepository;
+    private final AnswerService answerService;
+    public QuestionService(QuestionRepository questionRepository, QuestionDtoMapper questionDtoMapper, AnswerDtoMapper answerDtoMapper, AnswerRepository answerRepository, AnswerService answerService) {
         this.questionRepository = questionRepository;
         this.questionDtoMapper = questionDtoMapper;
         this.answerDtoMapper = answerDtoMapper;
+        this.answerRepository = answerRepository;
+        this.answerService = answerService;
     }
 
     Optional<NewQuestionDto> getQuestionById(Long id) {
