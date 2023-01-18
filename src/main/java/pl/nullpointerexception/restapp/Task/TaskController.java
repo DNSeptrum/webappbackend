@@ -38,11 +38,11 @@ public class TaskController {
 
     @PostMapping
     ResponseEntity<NewTaskDto> saveTask(@RequestBody NewTaskDto task) {
-        NewTaskDto savedCompany = taskService.saveTask(task);
-        URI savedCompanyUri = ServletUriComponentsBuilder.fromCurrentRequest()
+        NewTaskDto savedTask = taskService.saveTask(task);
+        URI savedTaskUri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(savedCompany.getId())
+                .buildAndExpand(savedTask.getId())
                 .toUri();
-        return ResponseEntity.created(savedCompanyUri).body(savedCompany);
+        return ResponseEntity.created(savedTaskUri).body(savedTask);
     }
 }

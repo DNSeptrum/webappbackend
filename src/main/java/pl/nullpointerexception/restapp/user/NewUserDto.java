@@ -1,5 +1,6 @@
 package pl.nullpointerexception.restapp.user;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import pl.nullpointerexception.restapp.Ocena.Ocena;
@@ -15,13 +16,12 @@ public class NewUserDto {
     private String surname;
     private String password;
     private String role;
-    // @OneToOne
-    //  private UserDetails userDetails;
+
     private int lastGradeID;
     private boolean isLoggedIn;
 
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
     private List<Ocena> grades = new ArrayList<>();
 
     public NewUserDto() {

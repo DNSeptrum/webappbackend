@@ -17,11 +17,6 @@ public class Ocena {
     private int taskID;
     private Date Data;
     private String score;
-  //  @ManyToOne
-  //  @JoinColumn(name = "user_id")
-  //  private User user;
-
-
 
  public Ocena(String type,int value,int taskID,Date Data,String score){
      this.type = type;

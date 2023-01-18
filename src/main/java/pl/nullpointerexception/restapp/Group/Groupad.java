@@ -18,20 +18,20 @@ public class Groupad {
 
     private int creator;
     private Date date;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
     private List<Test> tests = new ArrayList<>();
 
     public void addTest(Test test) {
         tests.add(test);
     }
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
     private List<Task> tasks = new ArrayList<>();
 
     public void addTask(Task task) {
         tasks.add(task);
     }
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
     private List<User> members = new ArrayList<>();
 
     public void addUser(User user) {

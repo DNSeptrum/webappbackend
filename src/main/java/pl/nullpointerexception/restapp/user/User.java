@@ -22,7 +22,7 @@ public class User {
     private boolean isLoggedIn;
 
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
     private List<Ocena> grades = new ArrayList<>();
 
     public void addOcena(Ocena ocena) {

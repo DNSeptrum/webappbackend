@@ -69,4 +69,6 @@ public class NewQuestionDto {
     }
 
 
+    public void getQuestionById(Long id) {
+    }
 }

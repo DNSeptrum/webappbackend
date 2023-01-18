@@ -9,21 +9,30 @@ import java.util.Optional;
 @Service
 public class QuestionService {
 
+    Long answerId = 43L;
+
     private final QuestionRepository questionRepository;
     private final QuestionDtoMapper questionDtoMapper;
     private final AnswerDtoMapper answerDtoMapper;
 
-    public QuestionService(QuestionRepository questionRepository, QuestionDtoMapper questionDtoMapper, AnswerDtoMapper answerDtoMapper) {
+    private final AnswerRepository answerRepository;
+
+    public QuestionService(QuestionRepository questionRepository, QuestionDtoMapper questionDtoMapper, AnswerDtoMapper answerDtoMapper, AnswerRepository answerRepository) {
         this.questionRepository = questionRepository;
         this.questionDtoMapper = questionDtoMapper;
         this.answerDtoMapper = answerDtoMapper;
 
+        this.answerRepository = answerRepository;
     }
 
     Optional<NewQuestionDto> getQuestionById(Long id) {
         return questionRepository.findById(id)
                 .map(questionDtoMapper::map);
     }
+
+
+
+
 
     List<NewAnswerDto> getAnswerByQuestionId(Long questionId) {
         return questionRepository.findById(questionId)
@@ -33,6 +42,14 @@ public class QuestionService {
                 .map(answerDtoMapper::map)
                 .toList();
     }
+
+
+
+
+
+
+
+
 
     NewQuestionDto saveQuestion(NewQuestionDto questionDto) {
         Question question = questionDtoMapper.map(questionDto);

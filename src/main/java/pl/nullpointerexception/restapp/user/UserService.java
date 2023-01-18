@@ -21,7 +21,7 @@ public class UserService {
                 .map(userDtoMapper::map);
     }
 
-    NewUserDto saveUser(NewUserDto UserDto) {
+    public NewUserDto saveUser(NewUserDto UserDto) {
         User user = userDtoMapper.map(UserDto);
         User savedUser = userRepository.save(user);
         return userDtoMapper.map(savedUser);

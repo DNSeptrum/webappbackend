@@ -29,17 +29,17 @@ public class GroupController {
     }
 
     @GetMapping("/{id}")
-    Optional<Groupad> getUserById(@PathVariable Long id) {
+    Optional<Groupad> getGroupById(@PathVariable Long id) {
         return groupRepository.findById(id);
     }
 
     @PostMapping
-    ResponseEntity<NewGroupDto> saveOcena(@RequestBody NewGroupDto GroupDto) {
+    ResponseEntity<NewGroupDto> saveGroup(@RequestBody NewGroupDto GroupDto) {
         NewGroupDto savedGroup = groupService.saveGroup(GroupDto);
-        URI savedJobOfferUri = ServletUriComponentsBuilder.fromCurrentRequest()
+        URI savedGroupOfferUri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(savedGroup.getId())
                 .toUri();
-        return ResponseEntity.created(savedJobOfferUri).body(savedGroup);
+        return ResponseEntity.created(savedGroupOfferUri).body(savedGroup);
     }
 }
